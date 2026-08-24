@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.entity.Post;
+import com.example.backend.dto.PostResponse;
 import com.example.backend.service.PostService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> getAllPosts() {
+    public List<PostResponse> getAllPosts() {
         return postService.getAllPosts();
     }
 }
