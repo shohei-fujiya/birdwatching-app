@@ -17,4 +17,24 @@ public class Bird {
     private String description;
 
     private String imageUrl;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNameJa() {
+        return nameJa;
+    }
+
+    public String getNameEn() {
+        return nameEn;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }
