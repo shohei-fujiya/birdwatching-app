@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.PostResponse;
+import com.example.backend.entity.Area;
 import com.example.backend.entity.Bird;
 import com.example.backend.entity.Post;
 import com.example.backend.repository.PostRepository;
@@ -13,13 +14,16 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final BirdService birdService;
+    private final AreaService areaService;
 
     public PostService(
             PostRepository postRepository,
-            BirdService birdService
+            BirdService birdService,
+            AreaService areaService
     ) {
         this.postRepository = postRepository;
         this.birdService = birdService;
+        this.areaService = areaService;
     }
 
     public List<PostResponse> getAllPosts() {
@@ -30,14 +34,16 @@ public class PostService {
                 .map(post -> {
 
                     Bird bird = birdService.getBirdById(post.getBirdId());
+                    Area area = areaService.getAreaById(post.getAreaId());
 
                     String birdName = bird.getNameJa();
+                    String areaName = area.getName();
 
                     return new PostResponse(
                             post.getPostId(),
                             birdName,
                             post.getObservedDate(),
-                            null,
+                            areaName,
                             post.getComment()
                     );
                 })
