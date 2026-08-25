@@ -18,7 +18,12 @@ function App() {
         <h1>野鳥観察投稿アプリ</h1>
 
         {posts.map((post) => (
-            <p key={post.postId}>{post.comment}</p>
+            <div key={post.postId}>
+              <p>{post.birdName}</p>
+              <p>{post.observedDate}</p>
+              <p>{post.areaName}</p>
+              <p>{post.comment}</p>
+            </div>
           ))}
 
       </>
