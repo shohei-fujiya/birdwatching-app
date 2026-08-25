@@ -9,6 +9,8 @@ function App() {
   const [comment, setComment] = useState("")
   const [birds, setBirds] = useState([])
   const [areas, setAreas] = useState([])
+  const [birdPosts,setBirdPosts] = useState([])
+  const [selectedBirdId,setSelectedBirdId] = useState("")
 
 
   const fetchPosts = async () => {
@@ -55,9 +57,51 @@ function App() {
     fetchPosts()
   }
 
+
+  useEffect (() => {
+        if (selectedBirdId === "") {
+          return
+        }
+
+        const fetchBirdPosts = async () => {
+            const response = await fetch(`http://localhost:8080/api/posts?birdId=${selectedBirdId}`)
+            const data = await response.json()
+            setBirdPosts(data)
+        }
+
+        fetchBirdPosts()
+  }, [selectedBirdId])
+
+
   return (
       <>
         <h1>野鳥観察投稿アプリ</h1>
+        <h2>鳥別投稿一覧取得</h2>
+            <select
+                value={selectedBirdId}
+                onChange={(e) => setSelectedBirdId(Number(e.target.value))}
+            >
+                <option value="">鳥を選択してください</option>
+                {birds.map((bird) => (
+                    <option
+                        key={bird.id}
+                        value={bird.id}
+                    >
+                        {bird.nameJa}
+                    </option>
+                ))}
+            </select>
+
+            {birdPosts.map((post) => (
+                <div key={post.postId}>
+                    <p>{post.birdName}</p>
+                    <p>{post.observedDate}</p>
+                    <p>{post.areaName}</p>
+                    <p>{post.comment}</p>
+                </div>
+            ))}
+
+
 
             <select
                 value={birdId}

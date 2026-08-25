@@ -2,13 +2,9 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.PostResponse;
 import com.example.backend.dto.PostRequest;
+import com.example.backend.entity.Post;
 import com.example.backend.service.PostService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +30,12 @@ public class PostController {
     @PostMapping
     public void createPost(@RequestBody PostRequest postRequest) {
         postService.createPost(postRequest);
+    }
+
+    @GetMapping(params = "birdId")
+    public List<PostResponse> getPostsByBirdId(
+            @RequestParam Long birdId
+    ) {
+        return postService.getPostsByBirdId(birdId);
     }
 }
