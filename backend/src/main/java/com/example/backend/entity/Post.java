@@ -46,4 +46,15 @@ public class Post {
         return createdAt;
     }
 
+
+
+    public Post() {
+    }
+
+    public Post(Long birdId, Long areaId, LocalDate observedDate, String comment) {
+        this.birdId = birdId;
+        this.areaId = areaId;
+        this.observedDate = observedDate;
+        this.comment = comment;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.PostRequest;
 import com.example.backend.dto.PostResponse;
 import com.example.backend.entity.Area;
 import com.example.backend.entity.Bird;
@@ -49,5 +50,17 @@ public class PostService {
                 })
                 .toList();
 
+    }
+
+    public void createPost(PostRequest postRequest) {
+
+        Post post = new Post(
+                postRequest.getBirdId(),
+                postRequest.getAreaId(),
+                postRequest.getObservedDate(),
+                postRequest.getComment()
+        );
+
+        postRepository.save(post);
     }
 }
