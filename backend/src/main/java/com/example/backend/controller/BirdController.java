@@ -4,6 +4,8 @@ import com.example.backend.entity.Bird;
 import com.example.backend.service.BirdService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/birds")
@@ -22,5 +24,10 @@ public class BirdController {
     @GetMapping("/{id}")
     public Bird getBirdById(@PathVariable Long id) {
         return birdService.getBirdById(id);
+    }
+
+    @GetMapping
+    public List<Bird> getAllBirds() {
+        return birdService.getAllBirds();
     }
 }

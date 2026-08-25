@@ -3,28 +3,118 @@ import "./App.css"
 
 function App() {
   const [posts, setPosts] = useState([])
+  const [birdId, setBirdId] = useState("")
+  const [areaId, setAreaId] = useState("")
+  const [observedDate, setObservedDate] = useState("")
+  const [comment, setComment] = useState("")
+  const [birds, setBirds] = useState([])
+  const [areas, setAreas] = useState([])
+
+
+  const fetchPosts = async () => {
+    const response = await fetch("http://localhost:8080/api/posts")
+    const data = await response.json()
+    setPosts(data)
+  }
 
   useEffect (() => {
-    const fetchPosts = async () => {
-      const response = await fetch("http://localhost:8080/api/posts")
+
+    const fetchBirds = async () => {
+      const response = await fetch("http://localhost:8080/api/birds")
       const data = await response.json()
-      setPosts(data)
+      setBirds(data)
     }
+
+    const fetchAreas = async () => {
+      const response = await fetch("http://localhost:8080/api/areas")
+      const data = await response.json()
+      setAreas(data)
+    }
+
     fetchPosts()
+    fetchBirds()
+    fetchAreas()
   },[])
+
+  const handleSubmit = async () => {
+    const postData = {
+      birdId,
+      areaId,
+      observedDate,
+      comment
+    }
+
+    await fetch("http://localhost:8080/api/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(postData)
+    })
+
+    fetchPosts()
+  }
 
   return (
       <>
         <h1>野鳥観察投稿アプリ</h1>
 
-        {posts.map((post) => (
-            <div key={post.postId}>
-              <p>{post.birdName}</p>
-              <p>{post.observedDate}</p>
-              <p>{post.areaName}</p>
-              <p>{post.comment}</p>
-            </div>
-          ))}
+            <select
+                value={birdId}
+                onChange={(e) => setBirdId(Number(e.target.value))}
+            >
+                <option value="">鳥を選択してください</option>
+
+                {birds.map((bird) => (
+                    <option
+                        key={bird.id}
+                        value={bird.id}
+                    >
+                      {bird.nameJa}
+                    </option>
+                ))}
+            </select>
+
+            <select
+                value={areaId}
+                onChange={(e) => setAreaId(Number(e.target.value))}
+            >
+                <option value="">エリアを選択してください</option>
+
+                {areas.map((area) =>(
+                    <option
+                        key={area.id}
+                        value={area.id}>
+                      {area.name}
+                    </option>
+                ))}
+            </select>
+
+            <input
+                type="date"
+                value={observedDate}
+                onChange={(e) => setObservedDate(e.target.value)}
+            />
+
+            <input
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+            />
+
+            <button onClick={handleSubmit} >
+                投稿する
+            </button>
+
+
+            {posts.map((post) => (
+                <div key={post.postId}>
+                  <p>{post.birdName}</p>
+                  <p>{post.observedDate}</p>
+                  <p>{post.areaName}</p>
+                  <p>{post.comment}</p>
+                </div>
+              ))}
 
       </>
   )

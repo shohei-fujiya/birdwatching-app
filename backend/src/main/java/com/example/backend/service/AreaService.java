@@ -4,6 +4,8 @@ import com.example.backend.entity.Area;
 import com.example.backend.repository.AreaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AreaService {
 
@@ -16,5 +18,9 @@ public class AreaService {
     public Area getAreaById(Long id) {
         return areaRepository.findById(id)
         .orElse(null);
+    }
+
+    public List<Area> getAllAreas() {
+        return areaRepository.findAll();
     }
 }
