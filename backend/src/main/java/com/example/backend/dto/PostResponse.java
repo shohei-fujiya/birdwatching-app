@@ -5,22 +5,28 @@ import java.time.LocalDate;
 public class PostResponse {
 
     private Long postId;
+    private Long birdId;
     private String birdName;
-    private LocalDate observedDate;
+    private Long areaId;
     private String areaName;
+    private LocalDate observedDate;
     private String comment;
 
     public PostResponse(
             Long postId,
+            Long birdId,
             String birdName,
-            LocalDate observedDate,
+            Long areaId,
             String areaName,
+            LocalDate observedDate,
             String comment) {
 
         this.postId = postId;
+        this.birdId = birdId;
         this.birdName = birdName;
-        this.observedDate = observedDate;
+        this.areaId = areaId;
         this.areaName = areaName;
+        this.observedDate = observedDate;
         this.comment = comment;
     }
 
@@ -28,16 +34,20 @@ public class PostResponse {
         return postId;
     }
 
+    public Long getBirdId() { return birdId;}
+
     public String getBirdName() {
         return birdName;
     }
 
-    public LocalDate getObservedDate() {
-        return observedDate;
-    }
+    public Long getAreaId() { return areaId;}
 
     public String getAreaName() {
         return areaName;
+    }
+
+    public LocalDate getObservedDate() {
+        return observedDate;
     }
 
     public String getComment() {

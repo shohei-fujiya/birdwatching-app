@@ -55,4 +55,12 @@ public class PostController {
     public void deletePostById(@PathVariable Long postId) {
         postService.deletePostById(postId);
     }
+
+    @PutMapping("/{postId}")
+    public PostResponse updatePost(
+            @PathVariable Long postId,
+            @RequestBody PostRequest postRequest
+    ) {
+        return postService.updatePost(postId, postRequest);
+    }
 }

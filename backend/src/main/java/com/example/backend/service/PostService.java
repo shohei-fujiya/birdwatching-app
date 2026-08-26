@@ -42,9 +42,11 @@ public class PostService {
 
                     return new PostResponse(
                             post.getPostId(),
+                            post.getBirdId(),
                             birdName,
-                            post.getObservedDate(),
+                            post.getAreaId(),
                             areaName,
+                            post.getObservedDate(),
                             post.getComment()
                     );
                 })
@@ -78,9 +80,11 @@ public class PostService {
 
                     return new PostResponse(
                             post.getPostId(),
+                            post.getBirdId(),
                             birdName,
-                            post.getObservedDate(),
+                            post.getAreaId(),
                             areaName,
+                            post.getObservedDate(),
                             post.getComment()
                     );
                 })
@@ -101,9 +105,11 @@ public class PostService {
 
                     return new PostResponse(
                             post.getPostId(),
+                            post.getBirdId(),
                             birdName,
-                            post.getObservedDate(),
+                            post.getAreaId(),
                             areaName,
+                            post.getObservedDate(),
                             post.getComment()
                     );
                 })
@@ -121,9 +127,11 @@ public class PostService {
 
         return new PostResponse(
                 foundPost.getPostId(),
+                foundPost.getBirdId(),
                 birdName,
-                foundPost.getObservedDate(),
+                foundPost.getAreaId(),
                 areaName,
+                foundPost.getObservedDate(),
                 foundPost.getComment()
         );
     }
@@ -132,4 +140,27 @@ public class PostService {
         postRepository.deleteById(postId);
     }
 
+    public PostResponse updatePost(Long postId,PostRequest postRequest) {
+        Post post = postRepository.findById(postId).orElse(null);
+
+        post.setBirdId(postRequest.getBirdId());
+        post.setAreaId(postRequest.getAreaId());
+        post.setObservedDate(postRequest.getObservedDate());
+        post.setComment(postRequest.getComment());
+
+        postRepository.save(post);
+
+        Bird bird = birdService.getBirdById(post.getBirdId());
+        Area area = areaService.getAreaById(post.getAreaId());
+
+        return new PostResponse(
+                post.getPostId(),
+                post.getBirdId(),
+                bird.getNameJa(),
+                post.getAreaId(),
+                area.getName(),
+                post.getObservedDate(),
+                post.getComment()
+        );
+    }
 }

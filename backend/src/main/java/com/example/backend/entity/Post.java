@@ -46,6 +46,22 @@ public class Post {
         return createdAt;
     }
 
+    public void setBirdId(Long birdId) {
+        this.birdId = birdId;
+    }
+
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
+    }
+
+    public void setObservedDate(LocalDate observedDate) {
+        this.observedDate = observedDate;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 
 
     public Post() {

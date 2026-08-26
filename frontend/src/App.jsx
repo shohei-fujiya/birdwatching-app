@@ -15,6 +15,11 @@ function App() {
   const [areaPosts, setAreaPosts] = useState([])
   const [selectedPostId, setSelectedPostId] = useState("")
   const [selectedPost, setSelectedPost] = useState(null)
+  const [editBirdId, setEditBirdId] = useState("")
+  const [editAreaId, setEditAreaId] = useState("")
+  const [editObservedDate, setEditObservedDate] = useState("")
+  const [editComment, setEditComment] = useState("")
+  const [isEditing, setIsEditing] = useState(false)
 
 
   const fetchPosts = async () => {
@@ -126,6 +131,36 @@ function App() {
       setSelectedPostId("")
     }
 
+    const handleEditStart = () => {
+        setEditBirdId(selectedPost.birdId)
+        setEditAreaId(selectedPost.areaId)
+        setEditObservedDate(selectedPost.observedDate)
+        setEditComment(selectedPost.comment)
+
+        setIsEditing(true)
+    }
+
+    const handleUpdate = async () => {
+        const postData = {
+            birdId: editBirdId,
+            areaId: editAreaId,
+            observedDate: editObservedDate,
+            comment: editComment
+        }
+
+      const response =
+          await fetch(`http://localhost:8080/api/posts/${selectedPostId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(postData)
+                })
+
+      const data = await response.json()
+      setSelectedPost(data)
+    }
+
   return (
       <>
         <h1>野鳥観察投稿アプリ</h1><br />
@@ -145,7 +180,7 @@ function App() {
                 ))}
             </select><br />
 
-            <h3>---選択した鳥の投稿一覧---</h3>
+            <h3>-----選択した鳥の投稿一覧-----</h3>
             {birdPosts.map((post) => (
                 <div key={post.postId}>
                     <p>{post.birdName}</p>
@@ -172,7 +207,7 @@ function App() {
                     ))}
                 </select>
 
-                <h3>---選択したエリアの投稿一覧---</h3>
+                <h3>-----選択したエリアの投稿一覧-----</h3>
                 {areaPosts.map((post) => (
                     <div key={post.postId}>
                         <p>{post.birdName}</p>
@@ -186,87 +221,160 @@ function App() {
 
             <br />
             <br />
-            <h2>★野鳥観察投稿★</h2>
-            <select
-                value={birdId}
-                onChange={(e) =>
-                    setBirdId(
-                        e.target.value === "" ? "" : Number(e.target.value))}
-            >
-                <option value="">鳥を選択してください</option>
-
-                {birds.map((bird) => (
-                    <option
-                        key={bird.id}
-                        value={bird.id}
+            <h2>★野鳥観察投稿フォーム★</h2>
+                <div>
+                    <select
+                        value={birdId}
+                        onChange={(e) =>
+                            setBirdId(
+                                e.target.value === "" ? "" : Number(e.target.value))}
                     >
-                      {bird.nameJa}
-                    </option>
-                ))}
-            </select>
+                        <option value="">鳥を選択してください</option>
 
-            <select
-                value={areaId}
-                onChange={(e) =>
-                    setAreaId(
-                        e.target.value === "" ? "" : Number(e.target.value))}
-            >
-                <option value="">エリアを選択してください</option>
+                        {birds.map((bird) => (
+                            <option
+                                key={bird.id}
+                                value={bird.id}
+                            >
+                              {bird.nameJa}
+                            </option>
+                        ))}
+                    </select>
 
-                {areas.map((area) =>(
-                    <option
-                        key={area.id}
-                        value={area.id}>
-                      {area.name}
-                    </option>
-                ))}
-            </select>
+                    <select
+                        value={areaId}
+                        onChange={(e) =>
+                            setAreaId(
+                                e.target.value === "" ? "" : Number(e.target.value))}
+                    >
+                        <option value="">エリアを選択してください</option>
 
-            <input
-                type="date"
-                value={observedDate}
-                onChange={(e) => setObservedDate(e.target.value)}
-            />
+                        {areas.map((area) =>(
+                            <option
+                                key={area.id}
+                                value={area.id}>
+                              {area.name}
+                            </option>
+                        ))}
+                    </select>
 
-            <input
-                type="text"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-            />
+                    <input
+                        type="date"
+                        value={observedDate}
+                        onChange={(e) => setObservedDate(e.target.value)}
+                    />
 
-            <br />
-            <button onClick={handleSubmit} >
-                投稿する
-            </button>
-            <br />
-            <br />
+                    <input
+                        type="text"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    />
 
-            <h2>★投稿一覧★</h2>
-            {posts.map((post) => (
-                <div
-                    key={post.postId}
-                    onClick={() => setSelectedPostId(post.postId)}
-                >
-                  <p>{post.birdName}</p>
-                  <p>{post.observedDate}</p>
-                  <p>{post.areaName}</p>
-                  <p>{post.comment}</p>
+                    <br />
+                    <button onClick={handleSubmit} >
+                        投稿する
+                    </button>
                 </div>
-            ))}
+                    <br />
+                    <br />
 
-          　{selectedPost && (
+
+            {isEditing && (
               <div>
-                  <h2>投稿詳細</h2>
-                  <p>{selectedPost.birdName}</p>
-                  <p>{selectedPost.observedDate}</p>
-                  <p>{selectedPost.areaName}</p>
-                  <p>{selectedPost.comment}</p>
+                  <h2>★投稿を編集★</h2>
 
-                  <button onClick={handleDelete}>
-                      削除
+                  <select
+                      value={editBirdId}
+                      onChange={(e) =>
+                          setEditBirdId(
+                              e.target.value === "" ? "" : Number(e.target.value))}
+                  >
+                      <option value="">鳥を選択してください</option>
+
+                      {birds.map((bird) => (
+                          <option
+                              key={bird.id}
+                              value={bird.id}
+                          >
+                              {bird.nameJa}
+                          </option>
+                      ))}
+                  </select>
+
+                  <select
+                      value={editAreaId}
+                      onChange={(e) =>
+                          setEditAreaId(
+                              e.target.value === "" ? "" : Number(e.target.value))}
+                  >
+                      <option value="">エリアを選択してください</option>
+
+                      {areas.map((area) => (
+                          <option
+                              key={area.id}
+                              value={area.id}
+                          >
+                              {area.name}
+                          </option>
+                      ))}
+                  </select>
+
+                  <input
+                      type="date"
+                      value={editObservedDate}
+                      onChange={(e) => setEditObservedDate(e.target.value)}
+                  />
+
+                  <input
+                      type="text"
+                      value={editComment}
+                      onChange={(e) => setEditComment(e.target.value)}
+                  />
+
+                  <button onClick={handleUpdate}>
+                      保存
                   </button>
               </div>
-           )}
+            )}
+              <br />
+              <br />
+              <br />
+
+
+            <h2>★投稿一覧★</h2>
+                {posts.map((post) => (
+                    <div
+                        key={post.postId}
+                        onClick={() => setSelectedPostId(post.postId)}
+                    >
+                      <p>{post.birdName}</p>
+                      <p>{post.observedDate}</p>
+                      <p>{post.areaName}</p>
+                      <p>{post.comment}</p>
+                    </div>
+                ))}
+                <br />
+                <br />
+
+              　{selectedPost && (
+                  <div>
+                      <h2>-----投稿詳細-----</h2>
+                      <p>{selectedPost.birdName}</p>
+                      <p>{selectedPost.observedDate}</p>
+                      <p>{selectedPost.areaName}</p>
+                      <p>{selectedPost.comment}</p>
+                      <br />
+
+                      <button onClick={handleEditStart}>
+                          編集
+                      </button>
+                      <br />
+
+                      <button onClick={handleDelete}>
+                          削除
+                      </button>
+                  </div>
+               )}
 
       </>
   )
