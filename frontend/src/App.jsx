@@ -13,6 +13,8 @@ function App() {
   const [selectedBirdId, setSelectedBirdId] = useState("")
   const [selectedAreaId, setSelectedAreaId] = useState("")
   const [areaPosts, setAreaPosts] = useState([])
+  const [selectedPostId, setSelectedPostId] = useState("")
+  const [selectedPost, setSelectedPost] = useState(null)
 
 
   const fetchPosts = async () => {
@@ -93,6 +95,20 @@ function App() {
       fetchAreaPosts()
     }, [selectedAreaId])
 
+    useEffect(() => {
+        if (selectedPostId === "") {
+            return
+        }
+
+        const fetchSelectedPost = async () => {
+            const response = await fetch(`http://localhost:8080/api/posts/${selectedPostId}`)
+            const data = await response.json()
+            setSelectedPost(data)
+        }
+
+        fetchSelectedPost()
+    },[selectedPostId])
+
   return (
       <>
         <h1>野鳥観察投稿アプリ</h1><br />
@@ -112,7 +128,7 @@ function App() {
                 ))}
             </select><br />
 
-            <h3>選択した鳥の投稿一覧</h3>
+            <h3>---選択した鳥の投稿一覧---</h3>
             {birdPosts.map((post) => (
                 <div key={post.postId}>
                     <p>{post.birdName}</p>
@@ -139,7 +155,7 @@ function App() {
                     ))}
                 </select>
 
-                <h3>選択したエリアの投稿一覧</h3>
+                <h3>---選択したエリアの投稿一覧---</h3>
                 {areaPosts.map((post) => (
                     <div key={post.postId}>
                         <p>{post.birdName}</p>
@@ -153,6 +169,7 @@ function App() {
 
             <br />
             <br />
+            <h2>★野鳥観察投稿★</h2>
             <select
                 value={birdId}
                 onChange={(e) =>
@@ -204,16 +221,31 @@ function App() {
             <button onClick={handleSubmit} >
                 投稿する
             </button>
+            <br />
+            <br />
 
-
+            <h2>★投稿一覧★</h2>
             {posts.map((post) => (
-                <div key={post.postId}>
+                <div
+                    key={post.postId}
+                    onClick={() => setSelectedPostId(post.postId)}
+                >
                   <p>{post.birdName}</p>
                   <p>{post.observedDate}</p>
                   <p>{post.areaName}</p>
                   <p>{post.comment}</p>
                 </div>
-              ))}
+            ))}
+
+          　{selectedPost && (
+              <div>
+                  <h2>投稿詳細</h2>
+                  <p>{selectedPost.birdName}</p>
+                  <p>{selectedPost.observedDate}</p>
+                  <p>{selectedPost.areaName}</p>
+                  <p>{selectedPost.comment}</p>
+              </div>
+           )}
 
       </>
   )

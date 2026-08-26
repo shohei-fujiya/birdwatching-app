@@ -45,4 +45,9 @@ public class PostController {
     ) {
         return postService.getPostsByAreaId(areaId);
     }
+
+    @GetMapping("/{postId}")
+    public PostResponse getPostById(@PathVariable Long postId) {
+        return postService.getPostById(postId);
+    }
 }

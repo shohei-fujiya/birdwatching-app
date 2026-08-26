@@ -110,4 +110,22 @@ public class PostService {
                 .toList();
     }
 
+    public PostResponse getPostById(Long postId) {
+        Post foundPost = postRepository.findById(postId).orElse(null);
+
+        Bird bird = birdService.getBirdById(foundPost.getBirdId());
+        Area area = areaService.getAreaById(foundPost.getAreaId());
+
+        String birdName = bird.getNameJa();
+        String areaName = area.getName();
+
+        return new PostResponse(
+                foundPost.getPostId(),
+                birdName,
+                foundPost.getObservedDate(),
+                areaName,
+                foundPost.getComment()
+        );
+    }
+
 }
