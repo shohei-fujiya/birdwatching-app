@@ -109,6 +109,23 @@ function App() {
         fetchSelectedPost()
     },[selectedPostId])
 
+    const handleDelete = async () => {
+      const confirmed = window.confirm("この投稿を削除しますか？")
+
+      if (!confirmed) {
+          return
+      }
+
+      await fetch(`http://localhost:8080/api/posts/${selectedPostId}`,
+          {
+              method: "DELETE"
+          })
+
+      await fetchPosts()
+      setSelectedPost(null)
+      setSelectedPostId("")
+    }
+
   return (
       <>
         <h1>野鳥観察投稿アプリ</h1><br />
@@ -244,6 +261,10 @@ function App() {
                   <p>{selectedPost.observedDate}</p>
                   <p>{selectedPost.areaName}</p>
                   <p>{selectedPost.comment}</p>
+
+                  <button onClick={handleDelete}>
+                      削除
+                  </button>
               </div>
            )}
 

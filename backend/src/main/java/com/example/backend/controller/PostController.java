@@ -50,4 +50,9 @@ public class PostController {
     public PostResponse getPostById(@PathVariable Long postId) {
         return postService.getPostById(postId);
     }
+
+    @DeleteMapping("/{postId}")
+    public void deletePostById(@PathVariable Long postId) {
+        postService.deletePostById(postId);
+    }
 }

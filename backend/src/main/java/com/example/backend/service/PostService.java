@@ -128,4 +128,8 @@ public class PostService {
         );
     }
 
+    public void deletePostById(Long postId) {
+        postRepository.deleteById(postId);
+    }
+
 }
