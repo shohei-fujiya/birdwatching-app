@@ -41,7 +41,12 @@ function App() {
   },[])
 
   const handleSubmit = async () => {
-    const postData = {
+
+      if (birdId === "" || areaId === "" || observedDate === "") {
+          return
+      }
+
+      const postData = {
       birdId,
       areaId,
       observedDate,
@@ -150,7 +155,9 @@ function App() {
             <br />
             <select
                 value={birdId}
-                onChange={(e) => setBirdId(Number(e.target.value))}
+                onChange={(e) =>
+                    setBirdId(
+                        e.target.value === "" ? "" : Number(e.target.value))}
             >
                 <option value="">鳥を選択してください</option>
 
@@ -166,7 +173,9 @@ function App() {
 
             <select
                 value={areaId}
-                onChange={(e) => setAreaId(Number(e.target.value))}
+                onChange={(e) =>
+                    setAreaId(
+                        e.target.value === "" ? "" : Number(e.target.value))}
             >
                 <option value="">エリアを選択してください</option>
 
