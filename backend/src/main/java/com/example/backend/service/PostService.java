@@ -86,4 +86,28 @@ public class PostService {
                 })
                 .toList();
     }
+
+    public List<PostResponse> getPostsByAreaId(Long areaId) {
+        List<Post> posts = postRepository.findByAreaId(areaId);
+
+        return posts.stream()
+                .map(post -> {
+
+                    Bird bird = birdService.getBirdById(post.getBirdId());
+                    Area area = areaService.getAreaById(post.getAreaId());
+
+                    String birdName = bird.getNameJa();
+                    String areaName = area.getName();
+
+                    return new PostResponse(
+                            post.getPostId(),
+                            birdName,
+                            post.getObservedDate(),
+                            areaName,
+                            post.getComment()
+                    );
+                })
+                .toList();
+    }
+
 }

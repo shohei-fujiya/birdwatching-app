@@ -38,4 +38,11 @@ public class PostController {
     ) {
         return postService.getPostsByBirdId(birdId);
     }
+
+    @GetMapping(params = "areaId")
+    public List<PostResponse> getPostByAreaId(
+            @RequestParam Long areaId
+    ) {
+        return postService.getPostsByAreaId(areaId);
+    }
 }
