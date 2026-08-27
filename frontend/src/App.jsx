@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import "./App.css"
 import PostDetail from "./PostDetail.jsx";
+import PostCreate from "./PostCreate.jsx";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -181,60 +182,21 @@ function App() {
 
             <br />
             <br />
-            <h2>★野鳥観察投稿フォーム★</h2>
-                <div>
-                    <select
-                        value={birdId}
-                        onChange={(e) =>
-                            setBirdId(
-                                e.target.value === "" ? "" : Number(e.target.value))}
-                    >
-                        <option value="">鳥を選択してください</option>
 
-                        {birds.map((bird) => (
-                            <option
-                                key={bird.id}
-                                value={bird.id}
-                            >
-                              {bird.nameJa}
-                            </option>
-                        ))}
-                    </select>
-
-                    <select
-                        value={areaId}
-                        onChange={(e) =>
-                            setAreaId(
-                                e.target.value === "" ? "" : Number(e.target.value))}
-                    >
-                        <option value="">エリアを選択してください</option>
-
-                        {areas.map((area) =>(
-                            <option
-                                key={area.id}
-                                value={area.id}>
-                              {area.name}
-                            </option>
-                        ))}
-                    </select>
-
-                    <input
-                        type="date"
-                        value={observedDate}
-                        onChange={(e) => setObservedDate(e.target.value)}
-                    />
-
-                    <input
-                        type="text"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                    />
-
-                    <br />
-                    <button onClick={handleSubmit} >
-                        投稿する
-                    </button>
-                </div>
+          {/*投稿コンポーネント*/}
+            <PostCreate
+                birdId={birdId}
+                setBirdId={setBirdId}
+                birds={birds}
+                areaId={areaId}
+                setAreaId={setAreaId}
+                areas={areas}
+                observedDate={observedDate}
+                setObservedDate={setObservedDate}
+                comment={comment}
+                setComment={setComment}
+                handleSubmit={handleSubmit}
+            />
                     <br />
 
 
@@ -253,6 +215,7 @@ function App() {
                 <br />
                 <br />
 
+          {/*投稿詳細コンポーネント*/}
               　{selectedPost && (
                   <PostDetail
                       selectedPost={selectedPost}
