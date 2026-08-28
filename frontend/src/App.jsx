@@ -65,6 +65,7 @@ function App() {
   const handleSubmit = async () => {
 
       if (birdId === "" || areaId === "" || observedDate === "") {
+          alert("入力されていない項目があります")
           return
       }
 
@@ -83,9 +84,14 @@ function App() {
       body: JSON.stringify(postData)
     })
 
-    fetchPosts()
-    fetchBirdPosts()
-    fetchAreaPosts()
+    await fetchPosts()
+    await fetchBirdPosts()
+    await fetchAreaPosts()
+    setBirdId("")
+    setAreaId("")
+    setObservedDate("")
+    setComment("")
+    navigate("/")
   }
 
 
