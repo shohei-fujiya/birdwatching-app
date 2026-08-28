@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function PostDetail({
     selectedPost,
@@ -7,13 +8,17 @@ function PostDetail({
     setSelectedPostId,
     birds,
     areas,
-    fetchPosts
+    fetchPosts,
+    fetchBirdPosts,
+    fetchAreaPosts
 }) {
     const [isEditing, setIsEditing] = useState(false)
     const [editBirdId, setEditBirdId] = useState("")
     const [editAreaId, setEditAreaId] = useState("")
     const [editObservedDate, setEditObservedDate] = useState("")
     const [editComment, setEditComment] = useState("")
+
+    const navigate = useNavigate()
 
     const handleEditStart = () => {
         setEditBirdId(selectedPost.birdId)
@@ -43,6 +48,7 @@ function PostDetail({
 
         const data = await response.json()
         setSelectedPost(data)
+        await fetchPosts()
     }
 
     const handleDelete = async () => {
@@ -58,8 +64,11 @@ function PostDetail({
             })
 
         await fetchPosts()
+        await fetchBirdPosts()
+        await fetchAreaPosts()
         setSelectedPost(null)
         setSelectedPostId("")
+        navigate("/")
     }
 
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./App.css"
 import PostDetail from "./PostDetail.jsx";
 import PostCreate from "./PostCreate.jsx";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, Link, useNavigate } from "react-router-dom"
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -19,12 +19,29 @@ function App() {
   const [selectedPostId, setSelectedPostId] = useState("")
   const [selectedPost, setSelectedPost] = useState(null)
 
+  const navigate = useNavigate()
+
 
   const fetchPosts = async () => {
     const response = await fetch("http://localhost:8080/api/posts")
     const data = await response.json()
     setPosts(data)
   }
+
+  const fetchBirdPosts = async () => {
+    const response = await fetch(`http://localhost:8080/api/posts?birdId=${selectedBirdId}`)
+    const data = await response.json()
+    setBirdPosts(data)
+  }
+
+  const fetchAreaPosts = async () => {
+    const response = await fetch(`http://localhost:8080/api/posts?areaId=${selectedAreaId}`)
+    const data = await response.json()
+    setAreaPosts(data)
+  }
+
+
+
 
   useEffect (() => {
 
@@ -67,6 +84,8 @@ function App() {
     })
 
     fetchPosts()
+    fetchBirdPosts()
+    fetchAreaPosts()
   }
 
 
@@ -75,24 +94,12 @@ function App() {
           return
         }
 
-        const fetchBirdPosts = async () => {
-            const response = await fetch(`http://localhost:8080/api/posts?birdId=${selectedBirdId}`)
-            const data = await response.json()
-            setBirdPosts(data)
-        }
-
         fetchBirdPosts()
   }, [selectedBirdId])
 
   useEffect (() => {
       if (selectedAreaId === "") {
           return
-      }
-
-      const fetchAreaPosts = async () => {
-          const response = await fetch(`http://localhost:8080/api/posts?areaId=${selectedAreaId}`)
-          const data = await response.json()
-          setAreaPosts(data)
       }
 
       fetchAreaPosts()
@@ -113,7 +120,7 @@ function App() {
     },[selectedPostId])
 
   return (
-    <BrowserRouter>
+    <>
       <nav>
           <Link to="/">トップ</Link>
           <Link to="/posts/new">投稿する</Link>
@@ -129,7 +136,11 @@ function App() {
                   {posts.map((post) => (
                       <div
                           key={post.postId}
-                          onClick={() => setSelectedPostId(post.postId)}
+                          onClick={() => {
+                              setSelectedPostId(post.postId)
+                              navigate(`/posts/${post.postId}`)
+
+                      }}
                       >
                           <p>{post.birdName}</p>
                           <p>{post.observedDate}</p>
@@ -158,7 +169,10 @@ function App() {
                   {birdPosts.map((post) => (
                       <div
                           key={post.postId}
-                          onClick={() => setSelectedPostId(post.postId)}
+                          onClick={() => {
+                              setSelectedPostId(post.postId)
+                              navigate(`/posts/${post.postId}`)
+                          }}
                       >
                           <p>{post.birdName}</p>
                           <p>{post.observedDate}</p>
@@ -187,7 +201,12 @@ function App() {
                   {areaPosts.map((post) => (
                       <div
                           key={post.postId}
-                          onClick={() => setSelectedPostId(post.postId)}
+                          onClick={() => {
+                              setSelectedPostId(post.postId)
+                              navigate(`/posts/${post.postId}`)
+                          }
+
+                          }
                       >
                           <p>{post.birdName}</p>
                           <p>{post.observedDate}</p>
@@ -216,28 +235,11 @@ function App() {
                 handleSubmit={handleSubmit}
               />}
           />
-      </Routes>
 
-
-      <>
-        <br />
-
-            <br />
-
-
-            <br />
-            <br />
-
-
-
-                    <br />
-
-
-                <br />
-                <br />
-
-          {/*投稿詳細コンポーネント*/}
-              　{selectedPost && (
+          <Route
+              path="/posts/:postId"
+              element={
+                selectedPost ? (
                   <PostDetail
                       selectedPost={selectedPost}
                       setSelectedPost={setSelectedPost}
@@ -246,10 +248,16 @@ function App() {
                       birds={birds}
                       areas={areas}
                       fetchPosts={fetchPosts}
+                      fetchBirdPosts={fetchBirdPosts}
+                      fetchAreaPosts={fetchAreaPosts}
                   />
-                )}
-      </>
-    </BrowserRouter>
+                ) : (
+                  <p>読み込み中...</p>
+                )
+              }
+          />
+      </Routes>
+    </>
   )
 }
 
