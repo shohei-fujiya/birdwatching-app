@@ -29,12 +29,20 @@ function App() {
   }
 
   const fetchBirdPosts = async () => {
+    if (selectedBirdId === "") {
+        return
+    }
+
     const response = await fetch(`http://localhost:8080/api/posts?birdId=${selectedBirdId}`)
     const data = await response.json()
     setBirdPosts(data)
   }
 
   const fetchAreaPosts = async () => {
+    if (selectedAreaId === "") {
+        return
+    }
+
     const response = await fetch(`http://localhost:8080/api/posts?areaId=${selectedAreaId}`)
     const data = await response.json()
     setAreaPosts(data)
@@ -125,146 +133,144 @@ function App() {
         fetchSelectedPost()
     },[selectedPostId])
 
-  return (
-    <>
-      <nav>
-          <Link to="/">トップ</Link>
-          <Link to="/posts/new">投稿する</Link>
-    　</nav>
+  return <>
+    <nav>
+        <Link to="/">トップ</Link>
+        <Link to="/posts/new">投稿する</Link>
+   </nav>
 
-      <Routes>
-          <Route
-            path="/"
+    <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+                <h1>野鳥観察投稿アプリ</h1>
+                <h2>★最新投稿★</h2>
+                {[...posts]
+                    .sort((a,b) => new Date(b.observedDate) - new Date(a.observedDate))
+                    .slice(0, 3)
+                    .map((post) => (
+                        <div
+                            key={post.postId}
+                            onClick={() => {
+                                setSelectedPostId(post.postId)
+                                navigate(`/posts/${post.postId}`)
+
+                            }}
+                        >
+                            <p>{post.birdName}</p>
+                            <p>{post.observedDate}</p>
+                            <p>{post.areaName}</p>
+                            <p>{post.comment}</p>
+                        </div>
+                    ))
+                }
+
+                <h2>★鳥で探す★</h2>
+                <select
+                    value={selectedBirdId}
+                    onChange={(e) => setSelectedBirdId(Number(e.target.value))}
+                >
+                    <option value="">鳥を選択してください</option>
+                    {birds.map((bird) => <option
+                            key={bird.id}
+                            value={bird.id}
+                        >
+                            {bird.nameJa}
+                        </option>)}
+                </select><br />
+
+                <h3>-----選択した鳥の投稿一覧-----</h3>
+                {[...birdPosts]
+                    .sort((a, b) => new Date(b.observedDate) - new Date(a.observedDate))
+                    .map((post) => (
+                        <div
+                            key={post.postId}
+                            onClick={() => {
+                                setSelectedPostId(post.postId)
+                                navigate(`/posts/${post.postId}`)
+                            }}
+                        >
+                            <p>{post.birdName}</p>
+                            <p>{post.observedDate}</p>
+                            <p>{post.areaName}</p>
+                            <p>{post.comment}</p>
+                        </div>
+                    ))
+                }
+
+                <h2>★エリアで探す★</h2>
+                <select
+                    value={selectedAreaId}
+                    onChange={(e) => setSelectedAreaId(Number(e.target.value))}
+                >
+                    <option value="">エリアを選択してください</option>
+                    {areas.map((area) => <option
+                            key={area.id}
+                            value={area.id}
+                        >
+                            {area.name}
+                        </option>)}
+                </select>
+
+                <h3>-----選択したエリアの投稿一覧-----</h3>
+                {[...areaPosts]
+                    .sort((a,b) => new Date(b.observedDate) - new Date(a.observedDate))
+                    .map((post) => (
+                        <div
+                            key={post.postId}
+                            onClick={() => {
+                                setSelectedPostId(post.postId)
+                                navigate(`/posts/${post.postId}`)
+                            }}
+                        >
+                            <p>{post.birdName}</p>
+                            <p>{post.observedDate}</p>
+                            <p>{post.areaName}</p>
+                            <p>{post.comment}</p>
+                        </div>
+                    ))
+                }
+            </>
+          }
+        />
+
+        <Route
+          path="/posts/new"
+          element={
+            <PostCreate
+              birdId={birdId}
+              setBirdId={setBirdId}
+              birds={birds}
+              areaId={areaId}
+              setAreaId={setAreaId}
+              areas={areas}
+              observedDate={observedDate}
+              setObservedDate={setObservedDate}
+              comment={comment}
+              setComment={setComment}
+              handleSubmit={handleSubmit}
+            />}
+        />
+
+        <Route
+            path="/posts/:postId"
             element={
-              <>
-                  <h1>野鳥観察投稿アプリ</h1>
-                  <h2>★投稿一覧★</h2>
-                  {posts.map((post) => (
-                      <div
-                          key={post.postId}
-                          onClick={() => {
-                              setSelectedPostId(post.postId)
-                              navigate(`/posts/${post.postId}`)
-
-                      }}
-                      >
-                          <p>{post.birdName}</p>
-                          <p>{post.observedDate}</p>
-                          <p>{post.areaName}</p>
-                          <p>{post.comment}</p>
-                      </div>
-                  ))}
-
-                  <h2>★鳥で探す★</h2>
-                  <select
-                      value={selectedBirdId}
-                      onChange={(e) => setSelectedBirdId(Number(e.target.value))}
-                  >
-                      <option value="">鳥を選択してください</option>
-                      {birds.map((bird) => (
-                          <option
-                              key={bird.id}
-                              value={bird.id}
-                          >
-                              {bird.nameJa}
-                          </option>
-                      ))}
-                  </select><br />
-
-                  <h3>-----選択した鳥の投稿一覧-----</h3>
-                  {birdPosts.map((post) => (
-                      <div
-                          key={post.postId}
-                          onClick={() => {
-                              setSelectedPostId(post.postId)
-                              navigate(`/posts/${post.postId}`)
-                          }}
-                      >
-                          <p>{post.birdName}</p>
-                          <p>{post.observedDate}</p>
-                          <p>{post.areaName}</p>
-                          <p>{post.comment}</p>
-                      </div>
-                  ))}
-
-                  <h2>★エリアで探す★</h2>
-                  <select
-                      value={selectedAreaId}
-                      onChange={(e) => setSelectedAreaId(Number(e.target.value))}
-                  >
-                      <option value="">エリアを選択してください</option>
-                      {areas.map((area) => (
-                          <option
-                              key={area.id}
-                              value={area.id}
-                          >
-                              {area.name}
-                          </option>
-                      ))}
-                  </select>
-
-                  <h3>-----選択したエリアの投稿一覧-----</h3>
-                  {areaPosts.map((post) => (
-                      <div
-                          key={post.postId}
-                          onClick={() => {
-                              setSelectedPostId(post.postId)
-                              navigate(`/posts/${post.postId}`)
-                          }
-
-                          }
-                      >
-                          <p>{post.birdName}</p>
-                          <p>{post.observedDate}</p>
-                          <p>{post.areaName}</p>
-                          <p>{post.comment}</p>
-                      </div>
-                  ))}
-              </>
+              selectedPost ? <PostDetail
+                    selectedPost={selectedPost}
+                    setSelectedPost={setSelectedPost}
+                    selectedPostId={selectedPostId}
+                    setSelectedPostId={setSelectedPostId}
+                    birds={birds}
+                    areas={areas}
+                    fetchPosts={fetchPosts}
+                    fetchBirdPosts={fetchBirdPosts}
+                    fetchAreaPosts={fetchAreaPosts}
+                /> : <p>読み込み中...</p>
             }
-          />
-
-          <Route
-            path="/posts/new"
-            element={
-              <PostCreate
-                birdId={birdId}
-                setBirdId={setBirdId}
-                birds={birds}
-                areaId={areaId}
-                setAreaId={setAreaId}
-                areas={areas}
-                observedDate={observedDate}
-                setObservedDate={setObservedDate}
-                comment={comment}
-                setComment={setComment}
-                handleSubmit={handleSubmit}
-              />}
-          />
-
-          <Route
-              path="/posts/:postId"
-              element={
-                selectedPost ? (
-                  <PostDetail
-                      selectedPost={selectedPost}
-                      setSelectedPost={setSelectedPost}
-                      selectedPostId={selectedPostId}
-                      setSelectedPostId={setSelectedPostId}
-                      birds={birds}
-                      areas={areas}
-                      fetchPosts={fetchPosts}
-                      fetchBirdPosts={fetchBirdPosts}
-                      fetchAreaPosts={fetchAreaPosts}
-                  />
-                ) : (
-                  <p>読み込み中...</p>
-                )
-              }
-          />
-      </Routes>
-    </>
-  )
+        />
+    </Routes>
+  </>
 }
 
 export default App
