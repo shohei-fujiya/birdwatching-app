@@ -124,7 +124,7 @@ Service
 Repository
   ↓
 MySQL（Docker）
- ` ``` `**
+```
 
 ---
 
@@ -156,8 +156,7 @@ erDiagram
         varchar comment
         datetime created_at
     }
-` ``` `**
-
+```
 
 ※ `created_at` は現在のMVPでは未使用です。
 
