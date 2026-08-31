@@ -129,6 +129,8 @@ MySQL（Docker）
 
 ## ER図
 
+```mermaid
+erDiagram
     BIRD ||--o{ POSTS : has
     AREA ||--o{ POSTS : has
 
