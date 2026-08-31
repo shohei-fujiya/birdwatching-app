@@ -28,8 +28,8 @@ public class PostController {
     }
 
     @PostMapping
-    public void createPost(@RequestBody PostRequest postRequest) {
-        postService.createPost(postRequest);
+    public PostResponse createPost(@RequestBody PostRequest postRequest) {
+        return postService.createPost(postRequest);
     }
 
     @GetMapping(params = "birdId")

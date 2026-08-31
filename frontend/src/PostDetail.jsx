@@ -49,6 +49,7 @@ function PostDetail({
         const data = await response.json()
         setSelectedPost(data)
         await fetchPosts()
+        setIsEditing(false)
     }
 
     const handleDelete = async () => {
@@ -75,10 +76,11 @@ function PostDetail({
     return (
         <div>
             {isEditing && (
-                <div>
-                    <h2>★投稿を編集★</h2>
+                <div className="edit-form">
+                    <h2 className="edit-title">投稿を編集</h2>
 
                     <select
+                        className="edit-select"
                         value={editBirdId}
                         onChange={(e) =>
                             setEditBirdId(
@@ -97,6 +99,7 @@ function PostDetail({
                     </select>
 
                     <select
+                        className="edit-select"
                         value={editAreaId}
                         onChange={(e) =>
                             setEditAreaId(
@@ -115,36 +118,56 @@ function PostDetail({
                     </select>
 
                     <input
+                        className="edit-input"
                         type="date"
                         value={editObservedDate}
                         onChange={(e) => setEditObservedDate(e.target.value)}
                     />
 
-                    <input
-                        type="text"
+                    <textarea
+                        className="edit-textarea"
                         value={editComment}
                         onChange={(e) => setEditComment(e.target.value)}
                     />
 
-                  <button onClick={handleUpdate}>
+                  <button
+                      className="edit-save-button"
+                      onClick={handleUpdate}>
                         保存
                   </button>
                 </div>
             )}
 
-            <h2>-----投稿詳細-----</h2>
-            <p>{selectedPost.birdName}</p>
-            <p>{selectedPost.observedDate}</p>
-            <p>{selectedPost.areaName}</p>
-            <p>{selectedPost.comment}</p>
+            <div className="detail-page">
+                <h2 className="page-title">投稿詳細</h2>
 
-            <button onClick={handleEditStart}>
-                編集
-            </button>
-            <br />
-            <button onClick={handleDelete}>
-                削除
-            </button>
+                <div className="detail-card">
+                    <div className="detail-row">
+                        <span className="detail-label">鳥名</span>
+                        <span className="detail-value">{selectedPost.birdName}</span>
+                    </div>
+
+                    <div className="detail-row">
+                        <span className="detail-label">観察日</span>
+                        <span className="detail-value">{selectedPost.observedDate}</span>
+                    </div>
+
+                    <div className="detail-row">
+                        <span className="detail-label">エリア</span>
+                        <span className="detail-value">{selectedPost.areaName}</span>
+                    </div>
+
+                    <div className="detail-row">
+                        <span className="detail-label">コメント</span>
+                        <span className="detail-value">{selectedPost.comment}</span>
+                    </div>
+
+                    <div className="detail-actions">
+                        <button onClick={handleEditStart}>編集</button>
+                        <button onClick={handleDelete}>削除</button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

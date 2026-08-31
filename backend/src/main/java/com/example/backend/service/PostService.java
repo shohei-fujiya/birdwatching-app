@@ -54,7 +54,7 @@ public class PostService {
 
     }
 
-    public void createPost(PostRequest postRequest) {
+    public PostResponse createPost(PostRequest postRequest) {
 
         Post post = new Post(
                 postRequest.getBirdId(),
@@ -63,7 +63,23 @@ public class PostService {
                 postRequest.getComment()
         );
 
-        postRepository.save(post);
+        Post savedPost = postRepository.save(post);
+
+        Bird bird = birdService.getBirdById(savedPost.getBirdId());
+        Area area = areaService.getAreaById(savedPost.getAreaId());
+
+        String birdName = bird.getNameJa();
+        String areaName = area.getName();
+
+        return new PostResponse(
+                savedPost.getPostId(),
+                savedPost.getBirdId(),
+                birdName,
+                savedPost.getAreaId(),
+                areaName,
+                savedPost.getObservedDate(),
+                savedPost.getComment()
+        );
     }
 
     public List<PostResponse> getPostsByBirdId(Long birdId) {
