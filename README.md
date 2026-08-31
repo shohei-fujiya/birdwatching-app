@@ -57,8 +57,6 @@
 - 投稿編集
 - 投稿削除
 
-投稿完了後は、作成した投稿の詳細画面へ遷移します。
-
 ---
 
 ## 画面
@@ -178,22 +176,27 @@ erDiagram
 
 ## ローカル環境での起動方法
 
-前提環境
+### 前提環境
 
 以下がインストールされていることを前提としています。
 
-Java
-Node.js / npm
-Docker
-Git
+- Java 21
+- Node.js / npm
+- Docker
+- Git
 
-1. リポジトリをクローン
+### 1. リポジトリをクローン
 
-git clone <GitHubリポジトリURL>
+```powershell
+git clone https://github.com/shohei-fujiya/birdwatching-app.git
 cd birdwatching-app
+```
 
-2. MySQLコンテナを作成
+### 2. MySQLコンテナを作成
 
+任意のパスワードを設定して、MySQL 8.4のコンテナを作成します。
+
+```powershell
 docker run --name birdwatching-mysql `
   -e MYSQL_ROOT_PASSWORD=<任意のrootパスワード> `
   -e MYSQL_DATABASE=birdwatching `
@@ -201,58 +204,90 @@ docker run --name birdwatching-mysql `
   -e MYSQL_PASSWORD=<任意のユーザーパスワード> `
   -p 3306:3306 `
   -d mysql:8.4
+```
 
-application.properties のデータベースユーザー名・パスワードは、
-上記で設定した値と一致させてください。
+`backend/src/main/resources/application.properties` のデータベース接続情報を、
+上記で設定したユーザー名・パスワードと一致させてください。
 
-例：
-
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/birdwatching
 spring.datasource.username=birduser
 spring.datasource.password=<設定したユーザーパスワード>
 spring.jpa.hibernate.ddl-auto=update
+```
 
-3. Backendを起動
+### 3. Backendを起動
 
+プロジェクト直下から以下を実行します。
+
+```powershell
 cd backend
 .\mvnw.cmd spring-boot:run
+```
 
-Backend：
+Backendは以下で起動します。
 
+```text
 http://localhost:8080
+```
 
 初回起動時にSpring Data JPAによって必要なテーブルが作成されます。
 
-4. 初期データを登録
+Backendを起動したPowerShellは、そのまま起動状態にしておいてください。
 
-プロジェクト直下へ戻ります。
+### 4. 初期データを登録
+
+別のPowerShellを開き、プロジェクト直下へ移動します。
 
 ```powershell
-cd ..
+cd "＜birdwatching-appをクローンした場所＞\birdwatching-app"
+```
 
-backend/init-data.sql をMySQLコンテナへコピーします。
+`backend/init-data.sql` をMySQLコンテナへコピーします。
 
+```powershell
 docker cp .\backend\init-data.sql birdwatching-mysql:/tmp/init-data.sql
+```
 
-続いて、初期データをMySQLへ登録します。
+MySQLコンテナ内のシェルを開きます。
 
-docker exec birdwatching-mysql sh -c "mysql --default-character-set=utf8mb4 -u root -p birdwatching < /tmp/init-data.sql"
+```powershell
+docker exec -it birdwatching-mysql sh
+```
 
-パスワード入力を求められたら、MySQLコンテナ作成時に設定したrootパスワードを入力してください。
+コンテナ内で以下を実行します。
+
+```sh
+mysql --default-character-set=utf8mb4 -u root -p birdwatching < /tmp/init-data.sql
+```
+
+パスワードを求められたら、MySQLコンテナ作成時に設定したrootパスワードを入力します。
+
+実行後、コンテナのシェルを終了します。
+
+```sh
+exit
+```
 
 初期データには、鳥・エリア・観察投稿が含まれています。
 
-5. Frontendを起動
+### 5. Frontendを起動
 
-別のPowerShellを開き、プロジェクト直下から以下を実行します。
+さらに別のPowerShellを開き、プロジェクト直下から以下を実行します。
 
+```powershell
 cd frontend
 npm install
 npm run dev
+```
 
-Frontend：
+Frontendは以下で起動します。
 
+```text
 http://localhost:5173
+```
+
+ブラウザで上記URLを開くとアプリを利用できます。
 
 ---
 
