@@ -30,6 +30,16 @@ function PostDetail({
     }
 
     const handleUpdate = async () => {
+
+        if (
+            editBirdId === "" ||
+            editAreaId === "" ||
+            editObservedDate === ""
+        ) {
+            alert("入力されていない項目があります")
+            return
+        }
+
         const postData = {
             birdId: editBirdId,
             areaId: editAreaId,

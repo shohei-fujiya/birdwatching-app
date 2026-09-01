@@ -540,7 +540,29 @@ select option {
   background: #f7faf5;
 }
 
+.required,
+.optional {
+    margin-left: 8px;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+}
 
+.required {
+    color: #78995f;
+}
+
+.optional {
+    color: #999999;
+}
+
+.required-note {
+    margin-bottom: 24px;
+    font-size: 12px;
+    font-weight: 300;
+    color: #999999;
+    letter-spacing: 0.05em;
+}
 
 
 

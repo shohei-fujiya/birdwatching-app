@@ -18,9 +18,13 @@ function PostCreate({
            <div className="post-form-page">
                <h2 className="page-title">投稿する</h2>
 
+               <p className="required-note">* は必須項目です</p>
+
                <form className="post-form">
                    <div className="form-group">
-                       <label>鳥</label>
+                       <label>
+                           鳥 <span className="required-mark">*</span>
+                       </label>
                        <select
                            value={birdId}
                            onChange={(e) =>
@@ -41,7 +45,9 @@ function PostCreate({
                    </div>
 
                    <div className="form-group">
-                       <label>観察日</label>
+                       <label>
+                           観察日 <span className="required-mark">*</span>
+                       </label>
                        <input
                            type="date"
                            value={observedDate}
@@ -50,7 +56,9 @@ function PostCreate({
                    </div>
 
                    <div className="form-group">
-                       <label>エリア</label>
+                       <label>
+                           エリア <span className="required-mark">*</span>
+                       </label>
                        <select
                            value={areaId}
                            onChange={(e) =>
@@ -70,7 +78,9 @@ function PostCreate({
                    </div>
 
                    <div className="form-group">
-                       <label>コメント</label>
+                       <label>
+                           コメント　
+                       </label>
                        <textarea
                            value={comment}
                            onChange={(e) => setComment(e.target.value)}
