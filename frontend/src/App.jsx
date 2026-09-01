@@ -94,8 +94,6 @@ function App() {
 
     const createdPost = await response.json()
 
-    console.log("createdPost:", createdPost)
-
     await fetchPosts()
     await fetchBirdPosts()
     await fetchAreaPosts()
