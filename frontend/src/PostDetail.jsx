@@ -48,7 +48,7 @@ function PostDetail({
         }
 
         const response =
-            await fetch(`http://localhost:8080/api/posts/${selectedPostId}`, {
+            await fetch(`https://birdwatching-app-production.up.railway.app/api/posts/${selectedPostId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type":"application/json"
@@ -69,7 +69,7 @@ function PostDetail({
             return
         }
 
-        await fetch(`http://localhost:8080/api/posts/${selectedPostId}`,
+        await fetch(`https://birdwatching-app-production.up.railway.app/api/posts/${selectedPostId}`,
             {
                 method: "DELETE"
             })
