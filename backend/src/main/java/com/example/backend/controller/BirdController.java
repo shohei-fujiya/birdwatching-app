@@ -11,7 +11,8 @@ import java.util.List;
 @RequestMapping("/api/birds")
 @CrossOrigin(origins = {
         "http://localhost:5173",
-        "http://localhost:5174"
+        "http://localhost:5174",
+        "https://zooming-caring-production-76bc.up.railway.app"
 })
 public class BirdController {
 
