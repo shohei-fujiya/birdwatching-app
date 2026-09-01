@@ -23,7 +23,7 @@ function App() {
 
 
   const fetchPosts = async () => {
-    const response = await fetch("http://localhost:8080/api/posts")
+    const response = await fetch( "https://birdwatching-app-production.up.railway.app/api/posts")
     const data = await response.json()
     setPosts(data)
   }
@@ -33,7 +33,7 @@ function App() {
         return
     }
 
-    const response = await fetch(`http://localhost:8080/api/posts?birdId=${selectedBirdId}`)
+    const response = await fetch(`https://birdwatching-app-production.up.railway.app/api/posts?birdId=${selectedBirdId}`)
     const data = await response.json()
     setBirdPosts(data)
   }
@@ -43,7 +43,7 @@ function App() {
         return
     }
 
-    const response = await fetch(`http://localhost:8080/api/posts?areaId=${selectedAreaId}`)
+    const response = await fetch(`https://birdwatching-app-production.up.railway.app/api/posts?areaId=${selectedAreaId}`)
     const data = await response.json()
     setAreaPosts(data)
   }
@@ -54,13 +54,13 @@ function App() {
   useEffect (() => {
 
     const fetchBirds = async () => {
-      const response = await fetch("http://localhost:8080/api/birds")
+      const response = await fetch("https://birdwatching-app-production.up.railway.app/api/birds")
       const data = await response.json()
       setBirds(data)
     }
 
     const fetchAreas = async () => {
-      const response = await fetch("http://localhost:8080/api/areas")
+      const response = await fetch("https://birdwatching-app-production.up.railway.app/api/areas")
       const data = await response.json()
       setAreas(data)
     }
@@ -84,7 +84,7 @@ function App() {
       comment
     }
 
-    const response = await fetch("http://localhost:8080/api/posts", {
+    const response = await fetch("https://birdwatching-app-production.up.railway.app/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -129,7 +129,7 @@ function App() {
         }
 
         const fetchSelectedPost = async () => {
-            const response = await fetch(`http://localhost:8080/api/posts/${selectedPostId}`)
+            const response = await fetch(`https://birdwatching-app-production.up.railway.app/api/posts/${selectedPostId}`)
             const data = await response.json()
             setSelectedPost(data)
         }
