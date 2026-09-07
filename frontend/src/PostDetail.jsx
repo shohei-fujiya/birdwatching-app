@@ -59,6 +59,8 @@ function PostDetail({
         const data = await response.json()
         setSelectedPost(data)
         await fetchPosts()
+        await fetchBirdPosts()
+        await fetchAreaPosts()
         setIsEditing(false)
     }
 
