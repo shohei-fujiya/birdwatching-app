@@ -175,8 +175,12 @@ function PostDetail({
                     </div>
 
                     <div className="detail-actions">
-                        <button onClick={handleEditStart}>編集</button>
-                        <button onClick={handleDelete}>削除</button>
+                        <button className="edit-button" onClick={handleEditStart}>
+                            編集
+                        </button>
+                        <button className="delete-button" onClick={handleDelete}>
+                            削除
+                        </button>
                     </div>
                 </div>
             </div>

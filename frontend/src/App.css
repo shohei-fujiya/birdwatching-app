@@ -17,7 +17,7 @@ body {
           Meiryo,
           sans-serif;
 
-  font-size: 16px;
+  font-size: 17px;
 }
 
 nav {
@@ -45,62 +45,56 @@ nav a:hover {
   opacity: 0.65;
 }
 
+.hero-bird-top {
+    position: absolute;
+    top: -60px;
+    left: -100px;
+    width: 100px;
+    height: auto;
+}
+
 .app-title {
+  position: relative;
   text-align: center;
-  margin: 70px 0 60px;
+  max-width: 700px;
+  margin: 100px auto;
 }
 
 .app-title-en {
-  margin-bottom: 24px;
-
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 500;
 
   letter-spacing: 0.18em;
   color: #78995f;
 }
 
 .app-title h1 {
-  margin: 0;
+  margin: 70px 0px;
 
-  font-size: 48px;
+  font-size: 80px;
   font-weight: 300;
 
   letter-spacing: 0.18em;
-  color: #333333;
+  color: #24382c;
+}
+
+.hero-bird-bottom {
+    position: absolute;
+    bottom: -30px;
+    right: -120px;
+    width: 180px;
+    height: auto;
 }
 
 .app-description {
-  margin-top: 30px;
-
-  font-size: 15px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 500;
 
   letter-spacing: 0.12em;
   line-height: 2;
 
   color: #777777;
-}
-
-h1 {
-  text-align: center;
-  margin: 40px 0 28px;
-
-  font-size: 2.8rem;
-  color: #24382c;
-
-  font-weight: 500;
-  letter-spacing: 0.04em;
-}
-
-h2 {
-  text-align: center;
-  margin: 32px 0 20px;
-
-  font-size: 1.6rem;
-  color: #304b39;
-  font-weight: 500;
 }
 
 .top-grid {
@@ -128,8 +122,8 @@ h2 {
 
   text-align: center;
 
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 28px;
+  font-weight: 400;
 
   letter-spacing: 0.12em;
 
@@ -141,7 +135,7 @@ h2 {
 
   text-align: center;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
 
   letter-spacing: 0.08em;
@@ -161,8 +155,11 @@ h2 {
     margin-bottom: 12px;
 
     background: #ffffff;
-    border: 1px solid #e1e6df;
+    border: 2px solid #dfe8da;
     border-radius: 3px;
+
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .search-post-card:hover,
@@ -186,7 +183,7 @@ h2 {
 .post-bird,
 .post-date,
 .post-area {
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.04em;
     white-space: nowrap;
 }
@@ -198,7 +195,7 @@ h2 {
 .post-date,
 .post-area {
     color: #777777;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .post-link {
@@ -209,24 +206,25 @@ h2 {
   margin: 30px auto 0;
   padding: 16px 20px;
 
-  border: 1px solid #8ca979;
-  border-radius: 3px;
+  border: 2px solid #9bb88e;
+  border-radius: 4px;
 
   text-align: center;
 
-  color: #698254;
+  color: #5f7f58;
 
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
 
   letter-spacing: 0.08em;
 
   transition: 0.3s;
+
+  text-decoration: none;
 }
 
 .post-link:hover {
-  background: #f7faf5;
-  opacity: 1;
+  background: #f4f8f2;
 }
 
 select {
@@ -252,8 +250,8 @@ select {
           Meiryo,
           sans-serif;
 
-  font-size: 15px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   letter-spacing: 0.08em;
 
   cursor: pointer;
@@ -265,10 +263,14 @@ select:focus {
 }
 
 select option {
-  font-size: 15px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   letter-spacing: 0.05em;
 }
+
+
+
+
 
 
 
@@ -281,7 +283,8 @@ select option {
   padding: 0 24px;
 }
 
-.page-title {
+.page-title,
+.edit-title {
   margin-bottom: 40px;
 
   text-align: center;
@@ -320,16 +323,16 @@ select option {
 .detail-label {
   color: #78995f;
 
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 400;
   letter-spacing: 0.12em;
 }
 
 .detail-value {
   color: #444444;
 
-  font-size: 15px;
-  font-weight: 300;
+  font-size: 17px;
+  font-weight: 400;
   letter-spacing: 0.05em;
 
   line-height: 1.8;
@@ -344,20 +347,16 @@ select option {
   margin-top: 36px;
 }
 
-.detail-actions button {
+.edit-button,
+.delete-button {
   min-width: 110px;
-
   padding: 12px 20px;
 
   background: #ffffff;
-
-  border: 1px solid #8ca979;
   border-radius: 3px;
 
-  color: #698254;
-
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 400;
 
   letter-spacing: 0.08em;
 
@@ -365,8 +364,22 @@ select option {
   transition: 0.3s;
 }
 
-.detail-actions button:hover {
-  background: #f7faf5;
+.edit-button {
+    color: #698254;
+    border: 1px solid #8ca979;
+}
+
+.delete-button {
+    color: #a65a5a;
+    border: 1px solid #cdaaaa;
+}
+
+.edit-button:hover {
+    background: #f4f8f2;
+}
+
+.delete-button:hover {
+    background: #fbf3f3;
 }
 
 .edit-form {
@@ -401,8 +414,8 @@ select option {
 
     color: #444444;
 
-    font-size: 15px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 400;
     letter-spacing: 0.05em;
 }
 
@@ -431,8 +444,8 @@ select option {
 
     color: #698254;
 
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 400;
     letter-spacing: 0.12em;
 
     cursor: pointer;
@@ -440,8 +453,12 @@ select option {
 }
 
 .edit-save-button:hover {
-    background: #f7faf5;
+    background: #f4f8f2;
 }
+
+
+
+
 
 
 
@@ -476,7 +493,7 @@ select option {
   color: #78995f;
 
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
 
   letter-spacing: 0.12em;
 }
@@ -522,13 +539,13 @@ select option {
 
   background: #ffffff;
 
-  border: 1px solid #8ca979;
-  border-radius: 3px;
+  border: 1px solid #9bb88e;
+  border-radius: 4px;
 
-  color: #698254;
+  color: #5f7f58;
 
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 400;
 
   letter-spacing: 0.12em;
 
@@ -537,7 +554,7 @@ select option {
 }
 
 .form-submit:hover {
-  background: #f7faf5;
+    background: #f4f8f2;
 }
 
 .required,
@@ -558,11 +575,16 @@ select option {
 
 .required-note {
     margin-bottom: 24px;
-    font-size: 12px;
-    font-weight: 300;
-    color: #999999;
+    font-size: 13px;
+    font-weight: 400;
+    color: #78995f;
     letter-spacing: 0.05em;
 }
+
+.required-mark {
+    font-size: 15px;
+}
+
 
 
 
@@ -589,7 +611,16 @@ select option {
     }
 
     .app-title h1 {
-        font-size: 36px;
+        font-size: 48px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .hero-bird-bottom {
+        bottom: -10px;
+        right: -100px;
+        width: 180px;
+        height: auto;
     }
 
     .app-title-en {

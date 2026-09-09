@@ -18,7 +18,9 @@ function PostCreate({
            <div className="post-form-page">
                <h2 className="page-title">投稿する</h2>
 
-               <p className="required-note">* は必須項目です</p>
+               <p className="required-note">
+                   <span className="required-mark">*</span> は必須項目です
+               </p>
 
                <form className="post-form">
                    <div className="form-group">

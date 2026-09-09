@@ -82,7 +82,7 @@ function App() {
       areaId,
       observedDate,
       comment
-    }
+      }
 
     const response = await fetch("https://birdwatching-app-production.up.railway.app/api/posts", {
       method: "POST",
@@ -151,10 +151,20 @@ function App() {
                         <div className="app-title-en">
                             BIRD WATCHING IN KUSHIRO & NEMURO
                         </div>
+                        <img
+                            src="/images/birds/kingfisher3.png"
+                            alt="カワセミ"
+                            className="hero-bird-top"
+                        />
                         <h1>小鳥の旅</h1>
                         <p className="app-description">
-                            釧路・根室の野鳥観察を、もっと身近に。
+                            釧路・根室のバードウォッチングを、もっと身近に。
                         </p>
+                        <img
+                            src="/images/birds/Steller’s Sea Eagle3.png"
+                            alt="オオワシ"
+                            className="hero-bird-bottom"
+                        />
                     </div>
 
                     <div className="top-grid">
