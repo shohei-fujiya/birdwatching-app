@@ -729,12 +729,16 @@ select option {
         font-size: 48px;
     }
 
-    .hero-bird-bottom {
-        right: -100px;
-        bottom: -10px;
+    .hero-bird-top {
+        left: 20px;
+        top: -50px;
+        width: 65px;
+    }
 
-        width: 180px;
-        height: auto;
+    .hero-bird-bottom {
+        top: -50px;
+        right: 0px;
+        width: 110px
     }
 
     .app-title-en {
