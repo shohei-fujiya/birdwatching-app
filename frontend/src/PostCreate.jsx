@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 function PostCreate({
     birdId,
@@ -15,6 +16,10 @@ function PostCreate({
 }) {
    return (
        <>
+           <nav>
+               <Link to="/">TOP</Link>
+           </nav>
+
            <div className="post-form-page">
                <h2 className="page-title">投稿する</h2>
 

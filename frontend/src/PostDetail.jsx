@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function PostDetail({
     selectedPost,
@@ -86,105 +86,113 @@ function PostDetail({
 
 
     return (
-        <div>
-            {isEditing && (
-                <div className="edit-form">
-                    <h2 className="edit-title">投稿を編集</h2>
+        <>
+            <nav>
+                <Link to="/">TOP</Link>
+            </nav>
 
-                    <select
-                        className="edit-select"
-                        value={editBirdId}
-                        onChange={(e) =>
-                            setEditBirdId(
-                                e.target.value === "" ? "" : Number(e.target.value))}
-                    >
-                        <option value="">鳥を選択してください</option>
+            <div>
+                {isEditing && (
+                    <div className="edit-form">
+                        <h2 className="edit-title">投稿を編集</h2>
 
-                        {birds.map((bird) => (
-                            <option
-                                key={bird.id}
-                                value={bird.id}
-                            >
-                                {bird.nameJa}
-                            </option>
-                        ))}
-                    </select>
+                        <select
+                            className="edit-select"
+                            value={editBirdId}
+                            onChange={(e) =>
+                                setEditBirdId(
+                                    e.target.value === "" ? "" : Number(e.target.value))}
+                        >
+                            <option value="">鳥を選択してください</option>
 
-                    <select
-                        className="edit-select"
-                        value={editAreaId}
-                        onChange={(e) =>
-                            setEditAreaId(
-                                e.target.value === "" ? "" : Number(e.target.value))}
-                    >
-                        <option value="">エリアを選択してください</option>
+                            {birds.map((bird) => (
+                                <option
+                                    key={bird.id}
+                                    value={bird.id}
+                                >
+                                    {bird.nameJa}
+                                </option>
+                            ))}
+                        </select>
 
-                        {areas.map((area) => (
-                            <option
-                                key={area.id}
-                                value={area.id}
-                            >
-                                {area.name}
-                            </option>
-                        ))}
-                    </select>
+                        <select
+                            className="edit-select"
+                            value={editAreaId}
+                            onChange={(e) =>
+                                setEditAreaId(
+                                    e.target.value === "" ? "" : Number(e.target.value))}
+                        >
+                            <option value="">エリアを選択してください</option>
 
-                    <input
-                        className="edit-input"
-                        type="date"
-                        value={editObservedDate}
-                        onChange={(e) => setEditObservedDate(e.target.value)}
-                    />
+                            {areas.map((area) => (
+                                <option
+                                    key={area.id}
+                                    value={area.id}
+                                >
+                                    {area.name}
+                                </option>
+                            ))}
+                        </select>
 
-                    <textarea
-                        className="edit-textarea"
-                        value={editComment}
-                        onChange={(e) => setEditComment(e.target.value)}
-                    />
+                        <input
+                            className="edit-input"
+                            type="date"
+                            value={editObservedDate}
+                            onChange={(e) => setEditObservedDate(e.target.value)}
+                        />
 
-                  <button
-                      className="edit-save-button"
-                      onClick={handleUpdate}>
-                        保存
-                  </button>
-                </div>
-            )}
+                        <textarea
+                            className="edit-textarea"
+                            value={editComment}
+                            onChange={(e) => setEditComment(e.target.value)}
+                        />
 
-            <div className="detail-page">
-                <h2 className="page-title">投稿詳細</h2>
-
-                <div className="detail-card">
-                    <div className="detail-row">
-                        <span className="detail-label">鳥名</span>
-                        <span className="detail-value">{selectedPost.birdName}</span>
+                      <button
+                          className="edit-save-button"
+                          onClick={handleUpdate}>
+                            保存
+                      </button>
                     </div>
+                )}
 
-                    <div className="detail-row">
-                        <span className="detail-label">観察日</span>
-                        <span className="detail-value">{selectedPost.observedDate}</span>
-                    </div>
+                {!isEditing && (
+                    <div className="detail-page">
+                        <h2 className="page-title">投稿詳細</h2>
 
-                    <div className="detail-row">
-                        <span className="detail-label">エリア</span>
-                        <span className="detail-value">{selectedPost.areaName}</span>
-                    </div>
+                        <div className="detail-card">
+                            <div className="detail-row">
+                                <span className="detail-label">鳥名</span>
+                                <span className="detail-value">{selectedPost.birdName}</span>
+                            </div>
 
-                    <div className="detail-row">
-                        <span className="detail-label">コメント</span>
-                        <span className="detail-value">{selectedPost.comment}</span>
-                    </div>
+                            <div className="detail-row">
+                                <span className="detail-label">観察日</span>
+                                <span className="detail-value">{selectedPost.observedDate}</span>
+                            </div>
 
-                    <div className="detail-actions">
-                        <button className="edit-button" onClick={handleEditStart}>
-                            編集
-                        </button>
-                        <button className="delete-button" onClick={handleDelete}>
-                            削除
-                        </button>
+                            <div className="detail-row">
+                                <span className="detail-label">エリア</span>
+                                <span className="detail-value">{selectedPost.areaName}</span>
+                            </div>
+
+                            <div className="detail-row">
+                                <span className="detail-label">コメント</span>
+                                <span className="detail-value">{selectedPost.comment}</span>
+                            </div>
+
+                            <div className="detail-actions">
+                                <button className="edit-button" onClick={handleEditStart}>
+                                    編集
+                                </button>
+                                <button className="delete-button" onClick={handleDelete}>
+                                    削除
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
-        </div>
+        </>
     )
 }
 

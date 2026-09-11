@@ -1,105 +1,136 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
 
+
+/* =========================
+   Base
+========================= */
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  background: #ffffff;
-  color: #333333;
+    margin: 0;
+    background: #ffffff;
+    color: #333333;
 
-  font-family:
-          Arial,
-          "Hiragino Kaku Gothic ProN",
-          "Hiragino Sans",
-          "Yu Gothic",
-          Meiryo,
-          sans-serif;
+    font-family:
+            Arial,
+            "Hiragino Kaku Gothic ProN",
+            "Hiragino Sans",
+            "Yu Gothic",
+            Meiryo,
+            sans-serif;
 
-  font-size: 17px;
+    font-size: 17px;
 }
 
+
+/* =========================
+   Navigation
+========================= */
+
 nav {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
-  padding: 28px 0;
+    padding: 28px 0;
 
-  border: none;
-  background: transparent;
+    border: none;
+    background: transparent;
 }
 
 nav a {
-  font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
 
-  font-size: 14px;
-  font-weight: 300;
+    font-size: 14px;
+    font-weight: 300;
 
-  letter-spacing: 0.18em;
+    letter-spacing: 0.18em;
 
-  color: #698254;
+    color: #698254;
+    text-decoration: none;
 }
 
 nav a:hover {
-  opacity: 0.65;
+    opacity: 0.65;
+}
+
+
+/* =========================
+   Hero / App title
+========================= */
+
+.app-title {
+    position: relative;
+
+    max-width: 700px;
+    margin: 100px auto;
+
+    text-align: center;
 }
 
 .hero-bird-top {
     position: absolute;
+
     top: -60px;
     left: -100px;
+
     width: 100px;
     height: auto;
 }
 
-.app-title {
-  position: relative;
-  text-align: center;
-  max-width: 700px;
-  margin: 100px auto;
-}
-
 .app-title-en {
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
+    font-family: "Montserrat", sans-serif;
 
-  letter-spacing: 0.18em;
-  color: #78995f;
+    font-size: 18px;
+    font-weight: 500;
+
+    letter-spacing: 0.18em;
+
+    color: #78995f;
 }
 
 .app-title h1 {
-  margin: 70px 0px;
+    margin: 70px 0;
 
-  font-size: 80px;
-  font-weight: 300;
+    font-size: 80px;
+    font-weight: 300;
 
-  letter-spacing: 0.18em;
-  color: #24382c;
+    letter-spacing: 0.18em;
+
+    color: #24382c;
 }
 
 .hero-bird-bottom {
     position: absolute;
-    bottom: -30px;
+
     right: -120px;
+    bottom: -30px;
+
     width: 180px;
     height: auto;
 }
 
 .app-description {
-  font-size: 18px;
-  font-weight: 500;
+    font-size: 18px;
+    font-weight: 500;
 
-  letter-spacing: 0.12em;
-  line-height: 2;
+    letter-spacing: 0.12em;
+    line-height: 2;
 
-  color: #777777;
+    color: #777777;
 }
+
+
+/* =========================
+   Top page
+========================= */
 
 .top-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
     gap: 32px;
 
     max-width: 1000px;
@@ -107,41 +138,46 @@ nav a:hover {
 }
 
 .top-section {
-  background: #ffffff;
+    padding: 40px 38px;
 
-  padding: 40px 38px;
+    background: #ffffff;
 
-  border: 1px solid #dfe8da;
-  border-radius: 6px;
+    border: 1px solid #dfe8da;
+    border-radius: 6px;
 
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .top-section h2 {
-  margin: 0 0 32px;
+    margin: 0 0 32px;
 
-  text-align: center;
+    text-align: center;
 
-  font-size: 28px;
-  font-weight: 400;
+    font-size: 28px;
+    font-weight: 400;
 
-  letter-spacing: 0.12em;
+    letter-spacing: 0.12em;
 
-  color: #3d493d;
+    color: #3d493d;
 }
 
 .result-title {
-  margin: 26px 0 20px;
+    margin: 26px 0 20px;
 
-  text-align: center;
+    text-align: center;
 
-  font-size: 18px;
-  font-weight: 400;
+    font-size: 18px;
+    font-weight: 400;
 
-  letter-spacing: 0.08em;
+    letter-spacing: 0.08em;
 
-  color: #555555;
+    color: #555555;
 }
+
+
+/* =========================
+   Post cards
+========================= */
 
 .search-post-card,
 .post-card {
@@ -155,6 +191,7 @@ nav a:hover {
     margin-bottom: 12px;
 
     background: #ffffff;
+
     border: 2px solid #dfe8da;
     border-radius: 3px;
 
@@ -164,20 +201,8 @@ nav a:hover {
 
 .search-post-card:hover,
 .post-card:hover {
-  border-color: #a4c26b;
-  background: #fbfdf9;
-}
-
-.post-bird {
-  text-align: left;
-}
-
-.post-date {
-  text-align: center;
-}
-
-.post-area {
-  text-align: right;
+    border-color: #a4c26b;
+    background: #fbfdf9;
 }
 
 .post-bird,
@@ -185,192 +210,237 @@ nav a:hover {
 .post-area {
     font-weight: 500;
     letter-spacing: 0.04em;
+
     white-space: nowrap;
 }
 
 .post-bird {
+    text-align: left;
+
     color: #5f7f68;
+}
+
+.post-date {
+    text-align: center;
+}
+
+.post-area {
+    text-align: right;
 }
 
 .post-date,
 .post-area {
     color: #777777;
+
     font-size: 15px;
 }
 
+
+/* =========================
+   Post link
+========================= */
+
 .post-link {
-  display: block;
+    display: block;
 
-  width: 240px;
+    width: 240px;
 
-  margin: 30px auto 0;
-  padding: 16px 20px;
+    margin: 30px auto 0;
+    padding: 16px 20px;
 
-  border: 2px solid #9bb88e;
-  border-radius: 4px;
+    border: 2px solid #9bb88e;
+    border-radius: 4px;
 
-  text-align: center;
+    text-align: center;
+    text-decoration: none;
 
-  color: #5f7f58;
+    color: #5f7f58;
 
-  font-size: 15px;
-  font-weight: 400;
+    font-size: 15px;
+    font-weight: 400;
 
-  letter-spacing: 0.08em;
+    letter-spacing: 0.08em;
 
-  transition: 0.3s;
-
-  text-decoration: none;
+    transition: 0.3s;
 }
 
 .post-link:hover {
-  background: #f4f8f2;
+    background: #f4f8f2;
 }
 
-select {
-  display: block;
-  width: 100%;
-  max-width: 420px;
 
-  margin: 0 auto 28px;
-  padding: 14px 16px;
+/* =========================
+   Normal select
+========================= */
 
-  background: #ffffff;
+/*
+  編集画面の .edit-select は除外。
+  これで通常selectの指定が編集画面へ
+  意図せず混ざることを防ぐ。
+*/
 
-  border: 1px solid #d8dfd5;
-  border-radius: 3px;
+select:not(.edit-select) {
+    display: block;
 
-  color: #444444;
+    width: 100%;
+    max-width: 420px;
 
-  font-family:
-          Arial,
-          "Hiragino Kaku Gothic ProN",
-          "Hiragino Sans",
-          "Yu Gothic",
-          Meiryo,
-          sans-serif;
+    margin: 0 auto 28px;
+    padding: 14px 16px;
 
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+    background: #ffffff;
 
-  cursor: pointer;
+    border: 1px solid #d8dfd5;
+    border-radius: 3px;
+
+    color: #444444;
+
+    font-family:
+            Arial,
+            "Hiragino Kaku Gothic ProN",
+            "Hiragino Sans",
+            "Yu Gothic",
+            Meiryo,
+            sans-serif;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
 }
 
-select:focus {
-  outline: none;
-  border-color: #a4c26b;
+select:not(.edit-select):focus {
+    outline: none;
+
+    border-color: #a4c26b;
 }
 
 select option {
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
+    font-size: 16px;
+    font-weight: 400;
+
+    letter-spacing: 0.05em;
 }
 
 
+/* =========================
+   PostDetail.jsx
+========================= */
 
-
-
-
-
-
-
-/*PosrDetail.jsx*/
 .detail-page {
-  max-width: 720px;
-  margin: 70px auto 100px;
-  padding: 0 24px;
+    max-width: 720px;
+
+    margin: 70px auto 100px;
+    padding: 0 24px;
 }
 
 .page-title,
 .edit-title {
-  margin-bottom: 40px;
+    text-align: center;
 
-  text-align: center;
+    font-size: 28px;
+    font-weight: 300;
 
-  font-size: 28px;
-  font-weight: 300;
-  letter-spacing: 0.12em;
+    letter-spacing: 0.12em;
 
-  color: #333333;
+    color: #333333;
+}
+
+/*
+  元CSSでは .edit-title が後ろで再定義されていた。
+  最終的に効いていた値をそれぞれ明示。
+*/
+
+.page-title {
+    margin-bottom: 40px;
+}
+
+.edit-title {
+    margin-bottom: 32px;
 }
 
 .detail-card {
-  padding: 36px 40px;
+    padding: 36px 40px;
 
-  background: #ffffff;
+    background: #ffffff;
 
-  border: 1px solid #dfe8da;
-  border-radius: 6px;
+    border: 1px solid #dfe8da;
+    border-radius: 6px;
 }
 
 .detail-row {
-  display: grid;
-  grid-template-columns: 100px 1fr;
+    display: grid;
+    grid-template-columns: 100px 1fr;
 
-  gap: 24px;
+    gap: 24px;
 
-  padding: 14px 0;
+    padding: 14px 0;
 
-  border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .detail-row:last-of-type {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .detail-label {
-  color: #78995f;
+    color: #78995f;
 
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
+    font-size: 15px;
+    font-weight: 400;
+
+    letter-spacing: 0.12em;
 }
 
 .detail-value {
-  color: #444444;
+    color: #444444;
 
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
+    font-size: 17px;
+    font-weight: 400;
 
-  line-height: 1.8;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
 }
 
 .detail-actions {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
-  gap: 16px;
+    gap: 16px;
 
-  margin-top: 36px;
+    margin-top: 36px;
 }
 
 .edit-button,
 .delete-button {
-  min-width: 110px;
-  padding: 12px 20px;
+    min-width: 110px;
 
-  background: #ffffff;
-  border-radius: 3px;
+    padding: 12px 20px;
 
-  font-size: 15px;
-  font-weight: 400;
+    background: #ffffff;
 
-  letter-spacing: 0.08em;
+    border-radius: 3px;
 
-  cursor: pointer;
-  transition: 0.3s;
+    font-size: 15px;
+    font-weight: 400;
+
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .edit-button {
     color: #698254;
+
     border: 1px solid #8ca979;
 }
 
 .delete-button {
     color: #a65a5a;
+
     border: 1px solid #cdaaaa;
 }
 
@@ -382,33 +452,30 @@ select option {
     background: #fbf3f3;
 }
 
+
+/* =========================
+   Edit form
+========================= */
+
 .edit-form {
     max-width: 620px;
+
     margin: 60px auto 80px;
     padding: 0 24px;
-}
-
-.edit-title {
-    margin-bottom: 32px;
-    text-align: center;
-
-    font-size: 28px;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-
-    color: #333333;
 }
 
 .edit-select,
 .edit-input,
 .edit-textarea {
     display: block;
+
     width: 100%;
 
     margin-bottom: 20px;
     padding: 13px 14px;
 
     background: #ffffff;
+
     border: 1px solid #d8dfd5;
     border-radius: 3px;
 
@@ -416,11 +483,38 @@ select option {
 
     font-size: 16px;
     font-weight: 400;
+
     letter-spacing: 0.05em;
+}
+
+/*
+  元CSSでは通常の select と .edit-select の両方が効いていた。
+  そのとき最終的に残っていた値をここへ明示して、
+  見た目を変えずに競合だけなくす。
+*/
+
+.edit-select {
+    max-width: 420px;
+
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+
+    font-family:
+            Arial,
+            "Hiragino Kaku Gothic ProN",
+            "Hiragino Sans",
+            "Yu Gothic",
+            Meiryo,
+            sans-serif;
+
+    cursor: pointer;
 }
 
 .edit-textarea {
     min-height: 120px;
+
     resize: vertical;
 }
 
@@ -428,17 +522,20 @@ select option {
 .edit-input:focus,
 .edit-textarea:focus {
     outline: none;
+
     border-color: #a4c26b;
 }
 
 .edit-save-button {
     display: block;
+
     width: 180px;
 
     margin: 32px auto 0;
     padding: 14px 20px;
 
     background: #ffffff;
+
     border: 1px solid #8ca979;
     border-radius: 3px;
 
@@ -446,6 +543,7 @@ select option {
 
     font-size: 15px;
     font-weight: 400;
+
     letter-spacing: 0.12em;
 
     cursor: pointer;
@@ -457,111 +555,115 @@ select option {
 }
 
 
+/* =========================
+   PostCreate.jsx
+========================= */
 
-
-
-
-
-
-
-/*PostCreate.jsx */
 .post-form-page {
-  max-width: 680px;
+    max-width: 680px;
 
-  margin: 70px auto 100px;
-  padding: 0 24px;
+    margin: 70px auto 100px;
+    padding: 0 24px;
 }
 
 .post-form {
-  padding: 40px;
+    padding: 40px;
 
-  background: #ffffff;
+    background: #ffffff;
 
-  border: 1px solid #dfe8da;
-  border-radius: 6px;
+    border: 1px solid #dfe8da;
+    border-radius: 6px;
 }
 
 .form-group {
-  margin-bottom: 28px;
+    margin-bottom: 28px;
 }
 
 .form-group label {
-  display: block;
+    display: block;
 
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 
-  color: #78995f;
+    color: #78995f;
 
-  font-size: 14px;
-  font-weight: 400;
+    font-size: 14px;
+    font-weight: 400;
 
-  letter-spacing: 0.12em;
+    letter-spacing: 0.12em;
 }
 
 .form-group input,
 .form-group textarea {
-  width: 100%;
+    width: 100%;
 
-  padding: 13px 14px;
+    padding: 13px 14px;
 
-  background: #ffffff;
+    background: #ffffff;
 
-  border: 1px solid #d8dfd5;
-  border-radius: 3px;
+    border: 1px solid #d8dfd5;
+    border-radius: 3px;
 
-  color: #444444;
+    color: #444444;
 
-  font-size: 15px;
-  font-weight: 300;
+    font-size: 15px;
+    font-weight: 300;
 
-  letter-spacing: 0.05em;
+    letter-spacing: 0.05em;
 }
 
 .form-group textarea {
-  min-height: 140px;
-  resize: vertical;
+    min-height: 140px;
+
+    resize: vertical;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  outline: none;
+    outline: none;
 
-  border-color: #a4c26b;
+    border-color: #a4c26b;
 }
 
 .form-submit {
-  display: block;
+    display: block;
 
-  width: 220px;
+    width: 220px;
 
-  margin: 40px auto 0;
-  padding: 15px 20px;
+    margin: 40px auto 0;
+    padding: 15px 20px;
 
-  background: #ffffff;
+    background: #ffffff;
 
-  border: 1px solid #9bb88e;
-  border-radius: 4px;
+    border: 1px solid #9bb88e;
+    border-radius: 4px;
 
-  color: #5f7f58;
+    color: #5f7f58;
 
-  font-size: 15px;
-  font-weight: 400;
+    font-size: 15px;
+    font-weight: 400;
 
-  letter-spacing: 0.12em;
+    letter-spacing: 0.12em;
 
-  cursor: pointer;
-  transition: 0.3s;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .form-submit:hover {
     background: #f4f8f2;
 }
 
+
+/* =========================
+   Required / optional
+========================= */
+
 .required,
 .optional {
     margin-left: 8px;
+
     font-size: 11px;
     font-weight: 300;
+
     letter-spacing: 0.08em;
 }
 
@@ -575,9 +677,12 @@ select option {
 
 .required-note {
     margin-bottom: 24px;
+
     font-size: 13px;
     font-weight: 400;
+
     color: #78995f;
+
     letter-spacing: 0.05em;
 }
 
@@ -586,12 +691,17 @@ select option {
 }
 
 
-
+/* =========================
+   Responsive
+========================= */
 
 @media (max-width: 768px) {
+
     .top-grid {
         grid-template-columns: 1fr;
+
         max-width: 100%;
+
         padding: 0 20px;
     }
 
@@ -599,8 +709,10 @@ select option {
         padding: 28px 20px;
     }
 
+    .search-post-card,
     .post-card {
         grid-template-columns: 1fr;
+
         gap: 6px;
     }
 
@@ -611,20 +723,23 @@ select option {
     }
 
     .app-title h1 {
-        font-size: 48px;
         margin-top: 30px;
         margin-bottom: 30px;
+
+        font-size: 48px;
     }
 
     .hero-bird-bottom {
-        bottom: -10px;
         right: -100px;
+        bottom: -10px;
+
         width: 180px;
         height: auto;
     }
 
     .app-title-en {
         font-size: 11px;
+
         letter-spacing: 0.18em;
     }
 

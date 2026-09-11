@@ -137,11 +137,6 @@ function App() {
 
   return (
       <>
-        <nav>
-            <Link to="/">TOP</Link>
-
-       </nav>
-
         <Routes>
             <Route
               path="/"
@@ -192,6 +187,7 @@ function App() {
                                         className="search-post-card"
                                         key={post.postId}
                                         onClick={() => {
+                                            setSelectedPost(null)
                                             setSelectedPostId(post.postId)
                                             navigate(`/posts/${post.postId}`)
                                         }}
@@ -227,6 +223,7 @@ function App() {
                                         className="search-post-card"
                                         key={post.postId}
                                         onClick={() => {
+                                            setSelectedPost(null)
                                             setSelectedPostId(post.postId)
                                             navigate(`/posts/${post.postId}`)
                                         }}
@@ -257,6 +254,7 @@ function App() {
                                         className="post-card"
                                         key={post.postId}
                                         onClick={() => {
+                                            setSelectedPost(null)
                                             setSelectedPostId(post.postId)
                                             navigate(`/posts/${post.postId}`)
 
