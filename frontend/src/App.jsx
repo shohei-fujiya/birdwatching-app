@@ -126,6 +126,8 @@ function App() {
             return
         }
 
+        setSelectedPost(null)
+
         const fetchSelectedPost = async () => {
             const response = await fetch(`https://birdwatching-app-production.up.railway.app/api/posts/${selectedPostId}`)
             const data = await response.json()
