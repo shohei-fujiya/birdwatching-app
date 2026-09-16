@@ -151,8 +151,8 @@ erDiagram
 
     POSTS {
         bigint post_id PK
-        bigint bird_id FK
-        bigint area_id FK
+        bigint bird_id 
+        bigint area_id 
         date observed_date
         varchar comment
         datetime created_at
